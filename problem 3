@@ -1,0 +1,72 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int ReadPositiveNumber(string message) {
+	int num;
+	while (true) {
+		cout << message;
+		cin >> num;
+		if (num > 0)
+			return num;
+
+	}
+}
+
+
+//problem 3 my code 
+
+
+enum enNumberType { Perfect, NotPerfect };
+
+enNumberType CheckIfPerfect(int num) {
+	int sum = 0;
+	for (int i = 1; i <= num / 2; i++)
+		if (num % i == 0)
+			sum += i;
+	if (sum == num)
+		return Perfect;
+	else
+		return NotPerfect;
+}
+
+void PrintNumberType(int num) {
+
+	switch (CheckIfPerfect(num)) {
+	case Perfect:
+		cout << "Perfect";
+		break;
+	case NotPerfect:
+		cout << "Not Perfect";
+	}
+
+
+}
+
+// problem 3 abu had's code 
+
+bool isPerfectNumber(int num) {
+	int sum = 0;
+	for (int i = 1; i < num; i++) {
+		if (num % i == 0)
+			sum += num;
+	}
+	return num == sum;
+}
+
+void PrintResult(int num) {
+	if (isPerfectNumber(num)) {
+		cout << num << " is perfect number.";
+	}
+	else {
+		cout << num << " is not perfect number.";
+	}
+}
+
+
+
+
+int main() {
+	PrintResult(ReadPositiveNumber("Enter number : "));
+	return 0;
+}

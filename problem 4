@@ -1,0 +1,44 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int ReadPositiveNumber(string message) {
+	int num;
+	while (true) {
+		cout << message;
+		cin >> num;
+		if (num > 0)
+			return num;
+
+	}
+}
+
+// from problem 3/2 
+bool isPerfectNumber(int num) {
+	int sum = 0;
+	for (int i = 1; i < num; i++) {
+		if (num % i == 0)
+			sum += i;
+	}
+	return num == sum;
+}
+
+
+// problem 4
+
+
+void PrintPerfectNumbersFrom1ToN(int n) {
+	for (int num = 1; num <= n; num++) {
+		if (isPerfectNumber(num))
+		{
+			cout << num << endl;
+		}
+	}
+}
+
+
+
+int main() {
+	PrintPerfectNumbersFrom1ToN(1000);
+	return 0;
+}

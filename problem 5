@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int ReadPositiveNumber(string message) {
+	int num;
+	while (true) {
+		cout << message;
+		cin >> num;
+		if (num > 0)
+			return num;
+
+	}
+}
+
+
+int NumberOfFields(int num) {
+	int counter = 0;
+	while (true){
+		num /= 10; 
+		counter += 1;
+		if (num == 0) {
+			return counter;
+		}	
+	}
+}
+
+void ReversedOrederNumber(int num) {
+	int rem = 0;
+	while (num > 0) {
+		rem = num % 10;
+		num /= 10;
+		cout << rem << endl;
+		
+	}
+}
+
+
+
+int main() {	
+
+	ReversedOrederNumber(ReadPositiveNumber("Enter a number to br reversed : "));
+}

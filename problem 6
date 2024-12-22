@@ -1,0 +1,30 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int ReadPositiveNumber(string message) {
+	int num;
+	while (true) {
+		cout << message;
+		cin >> num;
+		if (num > 0)
+			return num;
+
+	}
+}
+
+
+int SumOfNumberFields(int num) {
+	int sum = 0, rem = 0; 
+	while (num > 0) { 
+		sum += num % 10;
+		num /= 10;
+	}
+	return sum;
+}
+
+
+int main() {	
+
+	cout << SumOfNumberFields(123);
+}

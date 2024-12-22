@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+//problem 2 
+
+//from course 3 = problem 38 
+enum enPrimeNotPrime { Prime = 1, NotPrime = 2 };
+int ReadPositiveNumber(string message) {
+	int num;
+	while (true) {
+		cout << message;
+		cin >> num;
+		if (num > 0)
+			return num;
+
+	}
+}
+enPrimeNotPrime CheckPrimeNumber(int num) {
+	for (int i = 2; i <= num / 2; i++)
+		if (num % i == 0)
+			return NotPrime;
+	return Prime;
+}
+void PrintNumberType(int num) {
+	switch (CheckPrimeNumber(num)) {
+	case Prime:
+		cout << "Prime";
+		break;
+	case NotPrime:
+		cout << "Not Prime";
+	}
+}
+
+void PrintPrimeNumbersFrom1ToN(int n) {
+	for (int i = 1; i <= n; i++) {
+		if (CheckPrimeNumber(i) == Prime)
+			cout << i << "\n";
+	}
+}
+
+
+int main() {
+	
+	PrintPrimeNumbersFrom1ToN(ReadPositiveNumber("Enter a number : "));
+	
+	return 0;
+}

@@ -1,0 +1,34 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int ReadPositiveNumber(string message) {
+	int num;
+	while (true) {
+		cout << message;
+		cin >> num;
+		if (num > 0)
+			return num;
+
+	}
+}
+
+
+// problem 8	
+
+int CountDigitFrequncy(short DigitToCheck, int Num) {
+	int counter = 0;
+	while (Num > 0) {
+		if (Num % 10 == DigitToCheck)
+			counter += 1;
+		Num /= 10;
+	}
+	return counter;
+}
+
+int main() {	
+	int Number = ReadPositiveNumber("Enter Number : ");
+	short DigitToCheck = ReadPositiveNumber("Enter Number you want to count : ");
+	cout << CountDigitFrequncy(DigitToCheck, Number);
+
+}

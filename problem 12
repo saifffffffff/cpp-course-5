@@ -1,0 +1,23 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+
+// problem 12
+
+void PrintInvertedNumberPattern(int num) {
+	for (int i = num; i > 0; i--) {
+		for (int j = i; j > 0; j--)
+		{
+			cout << i;
+		}
+		cout << endl;
+	}
+}
+
+
+int main() {
+
+	PrintInvertedNumberPattern(5);
+}

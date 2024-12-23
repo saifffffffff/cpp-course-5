@@ -1,0 +1,41 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+
+int ReverseNumber(int num) {
+	int rem = 0, reversedNum = 0;
+	while (num > 0) {
+		rem = num % 10; // 123 // rem = 3 rev = 30 num = 12 // rem 2 rev = 320 
+		num /= 10;
+		reversedNum = reversedNum * 10 + rem;
+
+	}
+	return reversedNum;
+
+
+}
+void ReversedOrederNumber(int num) {
+	int rem = 0;
+	while (num > 0) {
+		rem = num % 10;
+		num /= 10;
+		cout << rem << endl;
+
+	}
+}
+
+// problem 11
+bool isPalindromeNumber(int num) {
+
+	return num == ReverseNumber(num);
+
+}
+
+
+int main() {
+
+	cout << isPalindromeNumber(123431);
+
+}

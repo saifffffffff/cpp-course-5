@@ -1,0 +1,84 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+int ReadPositiveNumber(string message) {
+	int num;
+	while (true) {
+		cout << message;
+		cin >> num;
+		if (num > 0)
+			return num;
+
+	}
+}
+
+
+int CountDigitFrequncy(short DigitToCheck, int Num) {
+	int counter = 0;
+	while (Num > 0) {
+		if (Num % 10 == DigitToCheck)
+			counter += 1;
+		Num /= 10;
+	}
+	return counter;
+}
+
+// problem 9 my code 
+
+
+bool isNumberInArr(int arr[] ,int size,int num) {
+
+	for (int i = 0; i < size; i++)
+		if (arr[i] == num)
+			return true;
+	return false;
+
+}
+
+void PrintAllDigitsFrequncy(int num) {
+	int rem, DigitFrequnt, counter = 0;
+	int arr[10] = {0};
+	while (num > 0) {
+		
+		rem = num % 10;
+		
+		
+		if(isNumberInArr(arr,counter,rem))
+		{
+			num /= 10;
+			continue;
+		}
+		
+		DigitFrequnt = CountDigitFrequncy(rem, num);
+		cout << rem << " is frequnted " << DigitFrequnt << " Times\n";
+		
+		num /= 10;
+		arr[counter] = rem;
+		counter++;
+	}
+
+}
+
+// problem 9 abu had's code
+
+void PrintAllDigitsFrequncy1(int num) {
+
+	for (int i = 0; i < 10; i++) {
+
+		short DigitFrequncy = CountDigitFrequncy(i, num);
+		if (DigitFrequncy > 0) {
+			cout << i << " is repeated " << DigitFrequncy << " Time(s)\n";
+		}
+
+	}
+
+}
+
+
+int main() {	
+	int n = 13003132;
+	PrintAllDigitsFrequncy1(n);
+	
+}

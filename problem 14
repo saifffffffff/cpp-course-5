@@ -1,0 +1,19 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+
+void PrintInvertedLettersPattern(int num) {				
+	for (int i = num+64 ; i >= 65 ; i--) { 
+		for (int j = 65; j <= i; j++) { // for (int j = 1 ; j <= (num - (num -1 - i)) ; j ++ )
+			cout << char(i);
+		}
+		cout << endl;
+	}
+}
+
+int main() {
+
+	PrintInvertedLettersPattern(3);
+}

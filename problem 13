@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+
+// problem 13 my code
+
+void PrintNormalNumberPattern(int num) {
+	for (int i = num; i > 0; i--) {
+		for (int j = i; j <= num; j++)
+		{
+			cout << i;
+		}
+		cout << endl;
+	}
+}
+
+// problem 13 abu had's code
+
+void PrintNormalNumberPattern1(int num) {
+
+	for (int i = 1; i <= num; i++) {
+		for (int j = 1; j <= i; j++)
+			cout << i;
+		cout << endl;
+	}
+
+}
+
+
+int main() {
+
+	PrintNormalNumberPattern1(5);
+}

@@ -1,0 +1,23 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+
+int GenerateRandomNumber( int From, int To ) {
+	
+	int randNum = rand() % (To - From + 1) + From; // dont forget that a % b = c , 0 <= c < b , c [0, b-1]
+	                                              //  num % (30 - 20)
+	return randNum;              			     //   num % 10 -> remainder [0, 9] -> +1 - > [0, 10] -> + from   
+}
+
+
+
+int main()
+
+{
+	// used in the main function to initialize the rand function
+	srand((unsigned)time(NULL));
+	cout << GenerateRandomNumber(1000, 1100);
+	return 0;
+}

@@ -1,0 +1,107 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+
+enum enSymbol {CapitalLetter, SmallLetter, SpecialChar, Digit};
+int GenerateRandomNumber( int From, int To ) {
+	
+	int randNum = rand() % (To - From + 1) + From;
+	                                             
+	return randNum;              			     
+
+}
+int ReadPositiveNumber(string message) {
+	int num;
+	while (true) {
+		cout << message;
+		cin >> num;
+		if (num > 0)
+			return num;
+
+	}
+}
+char GetRandomCharacter(enSymbol symbol) {
+	switch (symbol)
+	{
+	case CapitalLetter:
+		return char(GenerateRandomNumber(65, 90));
+		
+	case SmallLetter:
+		return char(GenerateRandomNumber(97, 122));
+		
+	case SpecialChar:
+		return char(GenerateRandomNumber(33, 47));
+		
+	case Digit:
+		return char(GenerateRandomNumber(48, 57));
+		
+	default:
+		break;
+	}
+}
+
+// problem 21
+
+string GenerateKey() {
+	
+	string word = "";
+	
+	for (int j = 1; j < 20; j++) {
+		if (j % 5 == 0)
+			word += '-';
+		else
+			word += GetRandomCharacter(CapitalLetter);
+	}
+	return word;
+}
+void GenerateKeys(short numberOfKeys) {
+	
+	for (int i = 0; i < numberOfKeys; i++) {
+		cout << "key [" << i + 1 << "] : " << GenerateKey() << endl;
+	}
+}
+
+
+
+// problem 21 abu had's code 
+
+string GenerateWord(short len, enSymbol symbol) {
+	string word = "";
+
+	for (int i = 0; i < len; i++)
+		word += GetRandomCharacter(symbol);
+	return word;
+}
+string GenerateKey1() {
+	string key = "";
+	key = key + GenerateWord(4, CapitalLetter)+'-';
+	key = key + GenerateWord(4, CapitalLetter) + '-';
+	key = key + GenerateWord(4, CapitalLetter) + '-';
+	key = key + GenerateWord(4, CapitalLetter);
+	return key;
+	
+}
+void GenerateKeys1(int numberOfKeys) {
+
+	for (int i = 0; i < numberOfKeys; i++) {
+		cout << "key [" << i + 1 << "] : " << GenerateKey1() << endl;
+	}
+}
+
+
+
+
+
+int main()
+{
+	// used in the main function to initialize the rand function
+	srand((unsigned)time(NULL));
+	
+	GenerateKeys1(5);
+	
+	//GenerateKeys(ReadPositiveNumber("Read positive number : "));
+	
+	return 0;
+}

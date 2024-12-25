@@ -1,0 +1,54 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+
+int GenerateRandomNumber( int From, int To ) {
+	
+	int randNum = rand() % (To - From + 1) + From;
+	                                             
+	return randNum;              			     
+
+}
+
+// problem 20
+
+enum enSymbol {CapitalLetter, SmallLetter, SpecialChar, Digit};
+
+
+
+char GetRandomCharacter(enSymbol symbol) {
+	switch (symbol)
+	{
+	case CapitalLetter:
+		return char(GenerateRandomNumber(65, 90));
+		
+	case SmallLetter:
+		return char(GenerateRandomNumber(97, 122));
+		
+	case SpecialChar:
+		return char(GenerateRandomNumber(33, 47));
+		
+	case Digit:
+		return char(GenerateRandomNumber(48, 57));
+		
+	default:
+		break;
+	}
+}
+
+int main()
+
+{
+	// used in the main function to initialize the rand function
+	srand((unsigned)time(NULL));
+	
+	cout << GetRandomCharacter(CapitalLetter)<<endl;
+	cout << GetRandomCharacter(SmallLetter) << endl;
+	cout << GetRandomCharacter(Digit) << endl;
+	cout << GetRandomCharacter(SpecialChar) << endl;
+
+
+	return 0;
+}

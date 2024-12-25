@@ -1,0 +1,98 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+
+enum enSymbol {CapitalLetter, SmallLetter, SpecialChar, Digit};
+int GenerateRandomNumber( int From, int To ) {
+	
+	int randNum = rand() % (To - From + 1) + From;
+	                                             
+	return randNum;              			     
+
+}
+int ReadPositiveNumber(string message) {
+	int num;
+	while (true) {
+		cout << message;
+		cin >> num;
+		if (num > 0)
+			return num;
+
+	}
+}
+char GetRandomCharacter(enSymbol symbol) {
+	switch (symbol)
+	{
+	case CapitalLetter:
+		return char(GenerateRandomNumber(65, 90));
+		
+	case SmallLetter:
+		return char(GenerateRandomNumber(97, 122));
+		
+	case SpecialChar:
+		return char(GenerateRandomNumber(33, 47));
+		
+	case Digit:
+		return char(GenerateRandomNumber(48, 57));
+		
+	default:
+		break;
+	}
+}
+void ReadArray(int arr[], int &size) {
+
+	cout << "Enter number of elements : ";
+	cin >> size;
+	
+	string message = "";
+	for (int i = 0; i < size; i++) {
+		message = "Enter Element [" + to_string(i + 1) +"] : ";
+		arr[i] = ReadPositiveNumber(message);
+	}
+}
+void PrintArray(int arr[], int size) {
+	for (int i = 0; i < size; i++)
+		cout << arr[i] << " ";
+	cout << endl;
+}
+void FillArrayWithRandomNumbers(int arr[], int size) {
+	for (int i = 0; i < size; i++)
+		arr[i] = GenerateRandomNumber(1, 100);
+}
+int FindMaxInArray(int arr[], int size) {
+	int maxValue = INT_MIN;
+	for (int i = 0; i < size; i++) {
+		if (maxValue < arr[i])
+			maxValue = arr[i];
+	}
+	return maxValue;
+}
+
+
+
+ 
+// problem 25
+
+int FindMinInArray(int arr[], int size) {
+	int minValue = INT_MAX;
+	for (int i = 0; i < size; i++) {
+		if (minValue > arr[i])
+			minValue = arr[i];
+	}
+	return minValue;
+}
+
+
+
+int main(){
+	   
+	int arr[100], size;
+	size = ReadPositiveNumber("Number of elements of the array : ");
+	FillArrayWithRandomNumbers(arr, size);
+	PrintArray(arr, size);
+	
+	cout << FindMinInArray(arr, size);
+	return 0;
+}

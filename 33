@@ -1,0 +1,199 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+
+enum enPrimeNotPrime { Prime = 1, NotPrime = 2 };
+enum enSymbol {CapitalLetter, SmallLetter, SpecialChar, Digit};
+int GenerateRandomNumber( int From, int To ) {
+	
+	int randNum = rand() % (To - From + 1) + From;
+	                                             
+	return randNum;              			     
+
+}
+int ReadPositiveNumber(string message) {
+	int num;
+	while (true) {
+		cout << message;
+		cin >> num;
+		if (num > 0)
+			return num;
+
+	}
+}
+char GetRandomCharacter(enSymbol symbol) {
+	switch (symbol)
+	{
+	case CapitalLetter:
+		return char(GenerateRandomNumber(65, 90));
+		
+	case SmallLetter:
+		return char(GenerateRandomNumber(97, 122));
+		
+	case SpecialChar:
+		return char(GenerateRandomNumber(33, 47));
+		
+	case Digit:
+		return char(GenerateRandomNumber(48, 57));
+		
+	default:
+		break;
+	}
+}
+void ReadArray(int arr[], int &size) {
+
+	cout << "Enter number of elements : ";
+	cin >> size;
+	
+	string message = "";
+	for (int i = 0; i < size; i++) {
+		message = "Enter Element [" + to_string(i + 1) +"] : ";
+		arr[i] = ReadPositiveNumber(message);
+	}
+}
+void PrintArray(int arr[], int size) {
+	for (int i = 0; i < size; i++)
+		cout << arr[i] << " ";
+	cout << endl;
+}
+void FillArrayWithRandomNumbers(int arr[], int size) {
+	for (int i = 0; i < size; i++)
+		arr[i] = GenerateRandomNumber(1, 100);
+}
+int FindMaxInArray(int arr[], int size) {
+	int maxValue = INT_MIN;
+	for (int i = 0; i < size; i++) {
+		if (maxValue < arr[i])
+			maxValue = arr[i];
+	}
+	return maxValue;
+}
+int FindMinInArray(int arr[], int size) {
+	int minValue = INT_MAX;
+	for (int i = 0; i < size; i++) {
+		if (minValue > arr[i])
+			minValue = arr[i];
+	}
+	return minValue;
+}
+int SumArray(int arr[], int size) {
+	int sum = 0;
+	for (int i = 0; i < size; i++) {
+		sum += arr[i];
+	}
+	return sum;
+}
+float AvgOfArray(int arr[], int size) {
+	return (float)SumArray(arr,size) / size;
+}
+void CopyArray(int arrSource[], int arrDestination[], int size) {
+	for (int i = 0; i < size; i++)
+		arrDestination[i] = arrSource[i];
+}
+enPrimeNotPrime CheckPrimeNumber(int num) {
+	for (int i = 2; i <= num / 2; i++)
+		if (num % i == 0)
+			return NotPrime;
+	return Prime;
+}
+void CopyArrOnlyPrimeNums(int arrSource[], int arrDestination[], int size1, int &size2) {
+	int index = 0;
+	for (int i = 0; i < size1; i++) {
+		if (CheckPrimeNumber(arrSource[i]) == Prime)
+		{
+			arrDestination[index] = arrSource[i];
+			index++;
+		}
+	}
+	size2 = index;
+
+}
+void SumTwoArrays(int arr1[], int arr2[], int arr3[], int size) {
+	for (int i = 0; i < size; i++) {
+		arr3[i] = arr1[i] + arr2[i];
+	}
+}
+void Swap( int &A, int &B) {
+	
+	
+	int temp = A;
+	A = B;
+	B = temp;
+
+}
+void FillArrayFrom1ToN(int arr[], int size) {
+	
+	for (int i = 0; i < size; i++)
+		arr[i] = i + 1;
+}
+void ShuffleArray(int arr[], int size) {
+	
+		for (int i = 0; i < size; i++) {
+			Swap(arr[GenerateRandomNumber(0, size - 1)], arr[GenerateRandomNumber(0, size - 1)]);
+		}
+
+}
+void CopyArrayInReversedOrder(int arrSource[], int arrDestination[], int size) {
+	for (int i = 0; i < size; i++) {
+		arrDestination[i] = arrSource[(size-1)-i];
+	}
+}
+
+string GenerateWord(short len, enSymbol symbol) {
+	string word = "";
+
+	for (int i = 0; i < len; i++)
+		word += GetRandomCharacter(symbol);
+	return word;
+}
+string GenerateKey() {
+	string key = "";
+	key = key + GenerateWord(4, CapitalLetter) + '-';
+	key = key + GenerateWord(4, CapitalLetter) + '-';
+	key = key + GenerateWord(4, CapitalLetter) + '-';
+	key = key + GenerateWord(4, CapitalLetter);
+	return key;
+
+}
+void GenerateKeys(int numberOfKeys) {
+
+	for (int i = 0; i < numberOfKeys; i++) {
+		cout << "key [" << i + 1 << "] : " << GenerateKey() << endl;
+	}
+}
+
+
+// problem 33
+
+
+void ReadArrayOfKeys (string arr[] , int size) {
+
+
+	for (int i = 0; i < size; i++) {
+		arr[i] = GenerateKey();
+	}
+}
+
+void PrintStringArray(string arr[], int size) {
+	for (int i = 0; i < size; i++) {
+		cout << "key [" << i + 1 << "] : " << arr[i] << endl;
+	}
+}
+
+
+int main(){
+	 
+	srand((unsigned)time(NULL));
+
+	string arr[100];
+	int size;
+	size = ReadPositiveNumber("Enter number of keys : ");
+	ReadArrayOfKeys(arr, size);
+
+	PrintStringArray(arr, size);
+
+
+	return 0;
+}

@@ -1,0 +1,517 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <cstdlib>
+using namespace std;
+
+
+enum enPrimeNotPrime { Prime = 1, NotPrime = 2 };
+enum enSymbol {CapitalLetter, SmallLetter, SpecialChar, Digit};
+
+
+int GenerateRandomNumber( int From, int To ) {
+	
+	int randNum = rand() % (To - From + 1) + From;
+	                                             
+	return randNum;              			     
+
+}
+int ReadNumber(string message) {
+	int num;
+	cout << message;
+	cin >> num;
+	return num;
+}
+int ReadPositiveNumber(string message) {
+	int num;
+	while (true) {
+		cout << message;
+		cin >> num;
+		if (num > 0)
+			return num;
+
+	}
+}
+char GetRandomCharacter(enSymbol symbol) {
+	switch (symbol)
+	{
+	case CapitalLetter:
+		return char(GenerateRandomNumber(65, 90));
+		
+	case SmallLetter:
+		return char(GenerateRandomNumber(97, 122));
+		
+	case SpecialChar:
+		return char(GenerateRandomNumber(33, 47));
+		
+	case Digit:
+		return char(GenerateRandomNumber(48, 57));
+		
+	default:
+		break;
+	}
+}
+void ReadArray(int arr[], int &size) {
+
+	cout << "Enter number of elements : ";
+	cin >> size;
+	
+	string message = "";
+	for (int i = 0; i < size; i++) {
+		message = "Enter Element [" + to_string(i + 1) +"] : ";
+		arr[i] = ReadPositiveNumber(message);
+	}
+}
+void PrintArray(int arr[], int size) {
+	for (int i = 0; i < size; i++)
+		cout << arr[i] << " ";
+	cout << endl;
+}
+void FillArrayWithRandomNumbers(int arr[], int size) {
+	for (int i = 0; i < size; i++)
+		arr[i] = GenerateRandomNumber(-100, 100);
+}
+int FindMaxInArray(int arr[], int size) {
+	int maxValue = INT_MIN;
+	for (int i = 0; i < size; i++) {
+		if (maxValue < arr[i])
+			maxValue = arr[i];
+	}
+	return maxValue;
+}
+int FindMinInArray(int arr[], int size) {
+	int minValue = INT_MAX;
+	for (int i = 0; i < size; i++) {
+		if (minValue > arr[i])
+			minValue = arr[i];
+	}
+	return minValue;
+}
+int SumArray(int arr[], int size) {
+	int sum = 0;
+	for (int i = 0; i < size; i++) {
+		sum += arr[i];
+	}
+	return sum;
+}
+float AvgOfArray(int arr[], int size) {
+	return (float)SumArray(arr,size) / size;
+}
+enPrimeNotPrime CheckPrimeNumber(int num) {
+	for (int i = 2; i <= (num / 2); i++)
+		if (num % i == 0)
+			return NotPrime;
+	return Prime;
+}
+void CopyArrOnlyPrimeNums(int arrSource[], int arrDestination[], int size1, int &size2) {
+	int index = 0;
+	for (int i = 0; i < size1; i++) {
+		if (CheckPrimeNumber(arrSource[i]) == Prime)
+		{
+			arrDestination[index] = arrSource[i];
+			index++;
+		}
+	}
+	size2 = index;
+
+}
+void SumTwoArrays(int arr1[], int arr2[], int arr3[], int size) {
+	for (int i = 0; i < size; i++) {
+		arr3[i] = arr1[i] + arr2[i];
+	}
+}
+void Swap( int &A, int &B) {
+	
+	
+	int temp = A;
+	A = B;
+	B = temp;
+
+}
+void FillArrayFrom1ToN(int arr[], int size) {
+	
+	for (int i = 0; i < size; i++)
+		arr[i] = i + 1;
+}
+string GenerateWord(short len, enSymbol symbol) {
+	string word = "";
+
+	for (int i = 0; i < len; i++)
+		word += GetRandomCharacter(symbol);
+	return word;
+}
+void ShuffleArray(int arr[], int size) {
+	
+		for (int i = 0; i < size; i++) {
+			Swap(arr[GenerateRandomNumber(0, size - 1)], arr[GenerateRandomNumber(0, size - 1)]);
+		}
+
+}
+void CopyArrayInReversedOrder(int arrSource[], int arrDestination[], int size) {
+	for (int i = 0; i < size; i++) {
+		arrDestination[i] = arrSource[(size-1)-i];
+	}
+}
+string GenerateKey() {
+	string key = "";
+	key = key + GenerateWord(4, CapitalLetter) + '-';
+	key = key + GenerateWord(4, CapitalLetter) + '-';
+	key = key + GenerateWord(4, CapitalLetter) + '-';
+	key = key + GenerateWord(4, CapitalLetter);
+	return key;
+
+}
+void GenerateKeys(int numberOfKeys) {
+
+	for (int i = 0; i < numberOfKeys; i++) {
+		cout << "key [" << i + 1 << "] : " << GenerateKey() << endl;
+	}
+}
+void PrintStringArray(string arr[], int size) {
+	for (int i = 0; i < size; i++) {
+		cout << "key [" << i + 1 << "] : " << arr[i] << endl;
+	}
+}
+void ReadArrayOfKeys (string arr[] , int size) {
+
+
+	for (int i = 0; i < size; i++) {
+		arr[i] = GenerateKey();
+	}
+}
+short FindNumberPositionInArray(int arr[],int num, int size) {
+	for (int i = 0; i < size; i++) {
+		if (arr[i] == num) {
+			return i;
+		}
+	}
+	// Not found
+	return -1;
+}
+bool IsNumberInArray(int arr[], int number, int size) {
+
+	return (FindNumberPositionInArray(arr, number, size) != -1);
+	
+
+}
+int ReadNumberInRange(int from, int to, string message) {
+	int num;
+	do {
+		cout << message;
+		cin >> num;
+	} while (num < from || num > to);
+	return num;
+}
+void AddNumberToArray(int arr[], int &size , int number) {
+		arr[size++] = number;
+}
+void AddNumbersToArray(int arr[], int& size) {
+	
+	bool AddMore = true;
+
+	do
+	{
+		
+		
+		AddNumberToArray(arr, size, ReadNumber("Please enter a number ? \n"));
+		
+		AddMore = ReadNumber("Do you want to add more numbers? [0]: No ,[1]: Yes ? \n");
+		
+
+	} while (AddMore);
+}
+void CopyArrayUsingAddNumberToArray(int arrSource[], int arrDestination[], int sizeSource, int &DestinationArraySize) {
+	
+	for (int i = 0; i < sizeSource; i++) {
+		AddNumberToArray(arrDestination, DestinationArraySize, arrSource[i]);
+	}
+
+}
+void CopyArray(int arrSource[], int arrDestination[], int size) {
+	for (int i = 0; i < size; i++)
+		arrDestination[i] = arrSource[i];
+}
+void CopyOddNumbers(int arrSource[], int arrDestination[], int sizeSource, int& sizeDestination) {
+
+
+	for (int i = 0; i < sizeSource; i++) {
+		if (arrSource[i] % 2 != 0)
+			AddNumberToArray(arrDestination, sizeDestination, arrSource[i]);
+	}
+
+}
+void CopyPrimeNumbers(int arrSource[], int arrDestination[], int sizeSource, int& sizeDestination) {
+	for (int i = 0; i < sizeSource; i++) {	
+		if (CheckPrimeNumber(arrSource[i]) == Prime)
+		{
+			AddNumberToArray(arrDestination, sizeDestination, arrSource[i]);
+		}
+	}
+}
+void CopyDistinctNumbers(int arrSource[], int arrDestination[], int sizeSource, int &sizeDestination) {
+	for (int i = 0; i < sizeSource; i++) {
+		if (!IsNumberInArray(arrDestination, arrSource[i], sizeDestination))
+		{
+			AddNumberToArray(arrDestination, sizeDestination, arrSource[i]);
+		}
+	}
+
+}
+bool IsPalindromeArray(int arr[], int size) {
+
+	for (int i = 0; i < size; i++) {
+		if (arr[i] != arr[size - i - 1]) {
+			return false;
+		}
+	}
+	return true;
+}
+int CountOddNumbersInArray(int arr[], int size) {
+	int counter = 0;
+	for (int i = 0; i < size; i++) {
+		if (arr[i] % 2 != 0)
+			counter += 1;
+	}
+	return counter;
+}
+int CountEvenNumbersInArray(int arr[], int size) {
+	int counter = 0;
+	for (int i = 0; i < size; i++) {
+		if (arr[i] % 2 == 0)
+			counter += 1;
+	}
+	return counter;
+}
+int CountPositiveNumbersInArray(int arr[], int size) {
+	int counter = 0;
+	for (int i = 0; i < size; i++) {
+		if (arr[i] > 0)
+			counter += 1;
+	}
+	return counter;
+}
+int CountNegativeNumbersInArray(int arr[], int size) {
+	int counter = 0;
+	for (int i = 0; i < size; i++) {
+		if (arr[i] < 0)
+			counter += 1;
+	}
+	return counter;
+}
+double MyAbs(double num) {
+
+	if (num >= 0) 
+		return num;
+	
+	else
+		return num * -1;
+
+
+}
+float GetFractionalpart(float num) {
+	return  num - (int)num;
+}
+int MyRound(float num) {
+
+	int intPart = num;
+	float fractionalPart = GetFractionalpart(num);
+
+	if (MyAbs(fractionalPart) >= 0.5) {
+		if (num > 0)
+			return ++intPart;
+		else
+			return --intPart;
+	}
+	else
+	{
+		return intPart;
+	}
+}
+int MyFloor(float num) {
+	if (num > 0 )
+		return (int)num;
+	else
+		return (int)num - 1;
+}
+int MyCeil(float num) {
+	
+	float fractionalPart = GetFractionalpart(num);
+
+	if (fractionalPart != 0)
+	{
+		if (num > 0) {
+			return int(num) + 1;
+		}
+		else {
+			return int(num);
+		}
+	}
+	else
+		return num;
+}
+float MySqrt(float num ) {
+	
+	return pow(num, 0.5);
+}
+
+
+
+
+
+
+
+enum enWinner {Player = 1, Computer = 2, Draw =3};
+enum enRPS {Rock = 1, Papper =2, Scissor = 3 };
+
+struct stGameInfo {
+	short RoundNumbers, PlayerWonTimes = 0 , ComputerWonTimes = 0 , DrawTimes = 0 ;
+	enWinner Winner;
+	enRPS PlayerRPS, ComputerRPS;
+};
+
+// project 1 
+enRPS checkRPS(int num) {
+
+	switch (num)
+	{
+	case 1:
+		return Rock;
+	case 2:
+		return Papper;
+	case 3:
+		return Scissor;
+	}
+}
+enRPS ReadUserChoice() {
+
+	int ans = ReadNumberInRange(1, 3, "Your choice : Rock [1], Paper [2], Scissor [3] : ");
+	return checkRPS(ans);
+}
+void CheckWhoWon(stGameInfo& Game) {
+	if (Game.PlayerRPS == Game.ComputerRPS) {
+		Game.Winner = Draw;
+	}
+	else if (Game.PlayerRPS == Rock && Game.ComputerRPS == Papper) {
+		Game.Winner = Computer;
+	}
+	else if (Game.PlayerRPS == Papper && Game.ComputerRPS == Scissor) {
+		Game.Winner = Computer;
+	}
+	else if (Game.PlayerRPS == Scissor && Game.ComputerRPS == Rock) {
+		Game.Winner = Computer;
+	}
+	else {
+		Game.Winner = Player;
+	}
+}
+
+bool YesOrNo(string message) {
+	char answer;
+	cout << message;
+	cin >> answer;
+	if (answer == 'y')
+		return true;
+	else
+		return false;
+}
+
+string GetPlayerChoice(stGameInfo Game) {
+	if (Game.PlayerRPS == Papper)
+		return "Paper";
+	if (Game.PlayerRPS == Rock)
+		return "Rock";
+	if (Game.PlayerRPS == Scissor)
+		return "Scissor";
+}
+string GetComputerChoice(stGameInfo Game) {
+	if (Game.ComputerRPS == Papper)
+		return "Paper";
+	if (Game.ComputerRPS == Rock)
+		return "Rock";
+	if (Game.ComputerRPS == Scissor)
+		return "Scissor";
+}
+
+void PrintRoundResults(stGameInfo& Game, short roundNum) {
+	cout << "\n______________ Round " << roundNum << "______________\n";
+	cout << "Player choice : " << GetPlayerChoice(Game) << endl;
+	cout << "Computer choice : " << GetComputerChoice(Game) << endl;
+
+	if (Game.Winner == Player)
+	{
+		cout << "Winner : Player";
+		Game.PlayerWonTimes += 1;
+		system("color 2F");
+	}
+	else if (Game.Winner == Computer)
+	{
+		cout << "Winner : Computer";
+		Game.ComputerWonTimes += 1;
+		system("color 4F");
+	}
+	else if (Game.Winner == Draw)
+	{
+		cout << "Winner : Draw";
+		Game.DrawTimes += 1;
+		system("color 6F");
+	}
+	cout << "\n____________________________________\n";
+}
+void PrintFinalResults(stGameInfo Game) {
+	string spaces = "\t\t\t";
+	cout << spaces << "______________________________ Game Over _____________________________\n";
+	cout << spaces << "___________________________ [game results] ___________________________\n\n";
+	cout << spaces << "Game rounds : " << Game.RoundNumbers << endl;
+	cout << spaces << "Computer Won times : " << Game.ComputerWonTimes << endl;
+	cout << spaces << "Player Won times : " << Game.PlayerWonTimes << endl;
+	cout << spaces << "Draw times : " << Game.DrawTimes << endl;
+	if (Game.PlayerWonTimes > Game.ComputerWonTimes) {
+		cout << spaces << "Player Won !!\n";
+	}
+	else if (Game.PlayerWonTimes < Game.ComputerWonTimes) {
+		cout << spaces << "Computer Won !!\n";
+	}
+	else {
+		cout << spaces << "Draw !! \n";
+	}
+}
+
+void RPSGame() {
+
+
+	while (true)
+	{
+		stGameInfo Game;
+		Game.RoundNumbers = ReadNumberInRange(1, 10, "How many rounds ( 1 to 10 )\n");
+
+		for (int i = 1; i <= Game.RoundNumbers; i++) {
+			cout << "Round [" << i << "] begins:\n";
+
+			Game.PlayerRPS = ReadUserChoice();
+			Game.ComputerRPS = checkRPS(GenerateRandomNumber(1, 3));
+
+			CheckWhoWon(Game);
+
+			PrintRoundResults(Game, i);
+
+		}
+		PrintFinalResults(Game);
+		if (!YesOrNo("Do you want to play another game [y] [n] ? "))
+			break;
+		system("clear");
+		system("color 0F");
+	}
+}
+
+
+
+
+int main() {
+	 
+	srand((unsigned)time(NULL));
+	
+		
+	RPSGame();
+		
+	return 0;
+}
